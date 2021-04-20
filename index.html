@@ -25,11 +25,11 @@
 
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button id="minusPart" class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input id="inputNumber1" type="text" class="form-control text-center" value="1">
-                           <button id="plusPart1" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button onclick=" handlePhoneChange(false)" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="phone-count" type="text" class="form-control text-center" value="1">
+                           <button onclick=" handlePhoneChange(true)" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
-                        <h5>$ <span id="mobilePrice">1219</span></h5>
+                        <h5>$ <span id="phone-total">1219</span></h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -43,9 +43,9 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button id="case-decrease" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <button onclick="handleProductChange(false)" class="btn btn-default"><i class="fas fa-minus"></i></button>
                            <input id="case-count" type="text" class="form-control text-center" value="1">
-                           <button id="case-increase" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button onclick=" handleProductChange(true)" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                         </div>
                         <h5>$ <span id="case-total"> 59</span> </h5>
@@ -79,13 +79,22 @@
    </section>
 
    <script>
-      document.getElementById('case-increase').addEventListener('click', function () {
-         handleProductChange(true);
+      function handlePhoneChange(isIncrease) {
+         const phoneInput = document.getElementById('phone-count');
+         const phoneCount = parseInt(phoneInput.value);
+         // const caseNewCount = caseCount - 1;
+         let phoneNewCount = phoneCount;
+         if (isIncrease == true) {
+            phoneNewCount = phoneCount + 1;
+         }
+         if (isIncrease == false && phoneCount > 0) {
+            phoneNewCount = phoneCount - 1;
+         }
+         phoneInput.value = phoneNewCount;
+         const phoneTotal = phoneNewCount * 1219;
+         document.getElementById('phone-total').innerText = phoneTotal;
+      }
 
-      })
-      document.getElementById('case-decrease').addEventListener('click', function () {
-         handleProductChange(false);
-      });
       function handleProductChange(isIncrease) {
          const caseInput = document.getElementById('case-count');
          const caseCount = parseInt(caseInput.value);
